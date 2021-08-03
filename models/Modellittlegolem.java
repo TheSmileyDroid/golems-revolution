@@ -62,9 +62,9 @@ public static class Modellittlegolem extends EntityModel<Entity> {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
 		this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
 		this.head.rotateAngleX = f4 / (180F / (float) Math.PI);
-		this.leg0.rotateAngleZ = MathHelper.cos(f * 1.0F) * -1.0F * f1;
-		this.leg1.rotateAngleZ = MathHelper.cos(f * 1.0F) * 1.0F * f1;
-		this.arm1.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
-		this.arm0.rotateAngleZ = MathHelper.cos(f * 0.6662F) * f1;
+		this.leg0.rotateAngleX = MathHelper.cos(f * 1.0F) * -1.0F * f1;
+		this.leg1.rotateAngleX = MathHelper.cos(f * 1.0F) * 1.0F * f1;
+		this.arm1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+		this.arm0.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
 	}
 }

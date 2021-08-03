@@ -20,6 +20,8 @@ import net.minecraftforge.common.DungeonHooks;
 import net.minecraft.world.World;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Hand;
@@ -45,6 +47,7 @@ import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.Entity;
@@ -183,33 +186,70 @@ public class LittleGolemEntity extends GolemsRevolutionModElements.ModElement {
 		public ActionResultType func_230254_b_(PlayerEntity sourceentity, Hand hand) {
 			ItemStack itemstack = sourceentity.getHeldItem(hand);
 			ActionResultType retval = ActionResultType.func_233537_a_(this.world.isRemote());
-			if (sourceentity instanceof ServerPlayerEntity) {
-				NetworkHooks.openGui((ServerPlayerEntity) sourceentity, new INamedContainerProvider() {
-					@Override
-					public ITextComponent getDisplayName() {
-						return new StringTextComponent("Little Golem");
-					}
+			if (sourceentity.isSecondaryUseActive()) {
+				if (sourceentity instanceof ServerPlayerEntity) {
+					NetworkHooks.openGui((ServerPlayerEntity) sourceentity, new INamedContainerProvider() {
+						@Override
+						public ITextComponent getDisplayName() {
+							return new StringTextComponent("Little Golem");
+						}
 
-					@Override
-					public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
-						PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
-						packetBuffer.writeBlockPos(new BlockPos(sourceentity.getPosition()));
-						packetBuffer.writeByte(0);
-						packetBuffer.writeVarInt(CustomEntity.this.getEntityId());
-						return new GolemInventoryGui.GuiContainerMod(id, inventory, packetBuffer);
-					}
-				}, buf -> {
-					buf.writeBlockPos(new BlockPos(sourceentity.getPosition()));
-					buf.writeByte(0);
-					buf.writeVarInt(this.getEntityId());
-				});
+						@Override
+						public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
+							PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
+							packetBuffer.writeBlockPos(new BlockPos(sourceentity.getPosition()));
+							packetBuffer.writeByte(0);
+							packetBuffer.writeVarInt(CustomEntity.this.getEntityId());
+							return new GolemInventoryGui.GuiContainerMod(id, inventory, packetBuffer);
+						}
+					}, buf -> {
+						buf.writeBlockPos(new BlockPos(sourceentity.getPosition()));
+						buf.writeByte(0);
+						buf.writeVarInt(this.getEntityId());
+					});
+				}
+				return ActionResultType.func_233537_a_(this.world.isRemote());
 			}
 			super.func_230254_b_(sourceentity, hand);
+			sourceentity.startRiding(this);
 			double x = this.getPosX();
 			double y = this.getPosY();
 			double z = this.getPosZ();
 			Entity entity = this;
 			return retval;
+		}
+
+		@Override
+		public void travel(Vector3d dir) {
+			Entity entity = this.getPassengers().isEmpty() ? null : (Entity) this.getPassengers().get(0);
+			if (this.isBeingRidden()) {
+				this.rotationYaw = entity.rotationYaw;
+				this.prevRotationYaw = this.rotationYaw;
+				this.rotationPitch = entity.rotationPitch * 0.5F;
+				this.setRotation(this.rotationYaw, this.rotationPitch);
+				this.jumpMovementFactor = this.getAIMoveSpeed() * 0.15F;
+				this.renderYawOffset = entity.rotationYaw;
+				this.rotationYawHead = entity.rotationYaw;
+				this.stepHeight = 1.0F;
+				if (entity instanceof LivingEntity) {
+					this.setAIMoveSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED));
+					float forward = ((LivingEntity) entity).moveForward;
+					float strafe = ((LivingEntity) entity).moveStrafing;
+					super.travel(new Vector3d(strafe, 0, forward));
+				}
+				this.prevLimbSwingAmount = this.limbSwingAmount;
+				double d1 = this.getPosX() - this.prevPosX;
+				double d0 = this.getPosZ() - this.prevPosZ;
+				float f1 = MathHelper.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+				if (f1 > 1.0F)
+					f1 = 1.0F;
+				this.limbSwingAmount += (f1 - this.limbSwingAmount) * 0.4F;
+				this.limbSwing += this.limbSwingAmount;
+				return;
+			}
+			this.stepHeight = 0.5F;
+			this.jumpMovementFactor = 0.02F;
+			super.travel(dir);
 		}
 	}
 }
