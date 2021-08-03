@@ -16,11 +16,11 @@ public static class Modellittlegolem extends EntityModel<Entity> {
 
 		body = new ModelRenderer(this);
 		body.setRotationPoint(0.0F, 0.0F, 0.0F);
-		body.setTextureOffset(0, 1).addBox(-5.6F, 5.0F, -4.4F, 11.0F, 7.0F, 7.0F, 0.0F, false);
+		body.setTextureOffset(0, 1).addBox(-6.6F, 5.0F, -4.4F, 13.0F, 7.0F, 7.0F, 0.0F, false);
 		body.setTextureOffset(0, 1).addBox(-2.5F, 11.8F, -2.4F, 5.0F, 3.0F, 3.0F, 0.5F, false);
 
 		head = new ModelRenderer(this);
-		head.setRotationPoint(0.0F, 0.0F, -2.0F);
+		head.setRotationPoint(0.0F, 0.0F, -1.0F);
 		head.setTextureOffset(0, 1).addBox(-2.6F, -1.2F, -3.3F, 5.0F, 6.0F, 5.0F, 0.0F, false);
 		head.setTextureOffset(0, 1).addBox(-0.4F, 3.4F, -4.5F, 1.0F, 2.0F, 1.0F, 0.0F, false);
 
@@ -29,7 +29,7 @@ public static class Modellittlegolem extends EntityModel<Entity> {
 		arm0.setTextureOffset(0, 1).addBox(5.8F, 10.9F, -1.8F, 2.0F, 18.0F, 4.0F, 0.0F, false);
 
 		arm1 = new ModelRenderer(this);
-		arm1.setRotationPoint(0.0F, -7.0F, 0.0F);
+		arm1.setRotationPoint(-1.0F, -7.0F, 0.0F);
 		arm1.setTextureOffset(0, 1).addBox(-7.4F, 10.9F, -1.8F, 2.0F, 18.0F, 4.0F, 0.0F, false);
 
 		leg0 = new ModelRenderer(this);
@@ -39,12 +39,6 @@ public static class Modellittlegolem extends EntityModel<Entity> {
 		leg1 = new ModelRenderer(this);
 		leg1.setRotationPoint(-5.0F, 11.0F, 0.0F);
 		leg1.setTextureOffset(0, 1).addBox(0.1F, 3.0F, -1.8F, 4.0F, 10.0F, 3.0F, 0.0F, false);
-	}
-
-	@Override
-	public void setRotationAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
-		// previously the render function, render code was moved to a method below
 	}
 
 	@Override
@@ -62,5 +56,16 @@ public static class Modellittlegolem extends EntityModel<Entity> {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
+	}
+
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity e) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
+		this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
+		this.head.rotateAngleX = f4 / (180F / (float) Math.PI);
+		this.leg0.rotateAngleY = MathHelper.cos(f * 1.0F) * -1.0F * f1;
+		this.leg1.rotateAngleY = MathHelper.cos(f * 1.0F) * 1.0F * f1;
+		this.arm1.rotateAngleY = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+		this.arm0.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+		this.body.rotateAngleZ = f2 / 20.f;
 	}
 }

@@ -6,16 +6,12 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.entity.Entity;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
 
 import net.mcreator.golemsrevolution.entity.LittleGolemEntity;
 
@@ -30,29 +26,12 @@ public class LittleGolemRenderer {
 		public void registerModels(ModelRegistryEvent event) {
 			RenderingRegistry.registerEntityRenderingHandler(LittleGolemEntity.entity, renderManager -> {
 				return new MobRenderer(renderManager, new Modellittlegolem(), 0.5f) {
-					{
-						this.addLayer(new GlowingLayer<>(this));
-					}
 					@Override
 					public ResourceLocation getEntityTexture(Entity entity) {
 						return new ResourceLocation("golems_revolution:textures/littlegolem.png");
 					}
 				};
 			});
-		}
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	private static class GlowingLayer<T extends Entity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
-		public GlowingLayer(IEntityRenderer<T, M> er) {
-			super(er);
-		}
-
-		public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn, float limbSwing,
-				float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-			IVertexBuilder ivertexbuilder = bufferIn
-					.getBuffer(RenderType.getEyes(new ResourceLocation("golems_revolution:textures/littlegolem.png")));
-			this.getEntityModel().render(matrixStackIn, ivertexbuilder, 15728640, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
 		}
 	}
 
@@ -71,17 +50,17 @@ public class LittleGolemRenderer {
 			textureHeight = 128;
 			body = new ModelRenderer(this);
 			body.setRotationPoint(0.0F, 0.0F, 0.0F);
-			body.setTextureOffset(0, 1).addBox(-5.6F, 5.0F, -4.4F, 11.0F, 7.0F, 7.0F, 0.0F, false);
+			body.setTextureOffset(0, 1).addBox(-6.6F, 5.0F, -4.4F, 13.0F, 7.0F, 7.0F, 0.0F, false);
 			body.setTextureOffset(0, 1).addBox(-2.5F, 11.8F, -2.4F, 5.0F, 3.0F, 3.0F, 0.5F, false);
 			head = new ModelRenderer(this);
-			head.setRotationPoint(0.0F, 0.0F, -2.0F);
+			head.setRotationPoint(0.0F, 0.0F, -1.0F);
 			head.setTextureOffset(0, 1).addBox(-2.6F, -1.2F, -3.3F, 5.0F, 6.0F, 5.0F, 0.0F, false);
 			head.setTextureOffset(0, 1).addBox(-0.4F, 3.4F, -4.5F, 1.0F, 2.0F, 1.0F, 0.0F, false);
 			arm0 = new ModelRenderer(this);
 			arm0.setRotationPoint(0.0F, -7.0F, 0.0F);
 			arm0.setTextureOffset(0, 1).addBox(5.8F, 10.9F, -1.8F, 2.0F, 18.0F, 4.0F, 0.0F, false);
 			arm1 = new ModelRenderer(this);
-			arm1.setRotationPoint(0.0F, -7.0F, 0.0F);
+			arm1.setRotationPoint(-1.0F, -7.0F, 0.0F);
 			arm1.setTextureOffset(0, 1).addBox(-7.4F, 10.9F, -1.8F, 2.0F, 18.0F, 4.0F, 0.0F, false);
 			leg0 = new ModelRenderer(this);
 			leg0.setRotationPoint(4.0F, 11.0F, 0.0F);
@@ -89,11 +68,6 @@ public class LittleGolemRenderer {
 			leg1 = new ModelRenderer(this);
 			leg1.setRotationPoint(-5.0F, 11.0F, 0.0F);
 			leg1.setTextureOffset(0, 1).addBox(0.1F, 3.0F, -1.8F, 4.0F, 10.0F, 3.0F, 0.0F, false);
-		}
-
-		@Override
-		public void setRotationAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-			// previously the render function, render code was moved to a method below
 		}
 
 		@Override
@@ -111,6 +85,16 @@ public class LittleGolemRenderer {
 			modelRenderer.rotateAngleX = x;
 			modelRenderer.rotateAngleY = y;
 			modelRenderer.rotateAngleZ = z;
+		}
+
+		public void setRotationAngles(Entity e, float f, float f1, float f2, float f3, float f4) {
+			this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
+			this.head.rotateAngleX = f4 / (180F / (float) Math.PI);
+			this.leg0.rotateAngleY = MathHelper.cos(f * 1.0F) * -1.0F * f1;
+			this.leg1.rotateAngleY = MathHelper.cos(f * 1.0F) * 1.0F * f1;
+			this.arm1.rotateAngleY = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+			this.arm0.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+			this.body.rotateAngleZ = f2 / 20.f;
 		}
 	}
 }
