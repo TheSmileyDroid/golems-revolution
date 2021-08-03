@@ -1,6 +1,7 @@
 
 package net.mcreator.golemsrevolution.gui;
 
+import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -74,7 +75,7 @@ public class GolemInventoryGui extends GolemsRevolutionModElements.ModElement {
 			super(containerType, id);
 			this.entity = inv.player;
 			this.world = inv.player.world;
-			this.internal = new ItemStackHandler(0);
+			this.internal = new ItemStackHandler(9);
 			BlockPos pos = null;
 			if (extraData != null) {
 				pos = extraData.readBlockPos();
@@ -112,6 +113,24 @@ public class GolemInventoryGui extends GolemsRevolutionModElements.ModElement {
 					}
 				}
 			}
+			this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 52, 17) {
+			}));
+			this.customSlots.put(1, this.addSlot(new SlotItemHandler(internal, 1, 70, 17) {
+			}));
+			this.customSlots.put(2, this.addSlot(new SlotItemHandler(internal, 2, 88, 17) {
+			}));
+			this.customSlots.put(3, this.addSlot(new SlotItemHandler(internal, 3, 52, 35) {
+			}));
+			this.customSlots.put(4, this.addSlot(new SlotItemHandler(internal, 4, 70, 35) {
+			}));
+			this.customSlots.put(5, this.addSlot(new SlotItemHandler(internal, 5, 88, 35) {
+			}));
+			this.customSlots.put(6, this.addSlot(new SlotItemHandler(internal, 6, 52, 53) {
+			}));
+			this.customSlots.put(7, this.addSlot(new SlotItemHandler(internal, 7, 70, 53) {
+			}));
+			this.customSlots.put(8, this.addSlot(new SlotItemHandler(internal, 8, 88, 53) {
+			}));
 			int si;
 			int sj;
 			for (si = 0; si < 3; ++si)
@@ -137,18 +156,18 @@ public class GolemInventoryGui extends GolemsRevolutionModElements.ModElement {
 			if (slot != null && slot.getHasStack()) {
 				ItemStack itemstack1 = slot.getStack();
 				itemstack = itemstack1.copy();
-				if (index < 0) {
-					if (!this.mergeItemStack(itemstack1, 0, this.inventorySlots.size(), true)) {
+				if (index < 9) {
+					if (!this.mergeItemStack(itemstack1, 9, this.inventorySlots.size(), true)) {
 						return ItemStack.EMPTY;
 					}
 					slot.onSlotChange(itemstack1, itemstack);
-				} else if (!this.mergeItemStack(itemstack1, 0, 0, false)) {
-					if (index < 0 + 27) {
-						if (!this.mergeItemStack(itemstack1, 0 + 27, this.inventorySlots.size(), true)) {
+				} else if (!this.mergeItemStack(itemstack1, 0, 9, false)) {
+					if (index < 9 + 27) {
+						if (!this.mergeItemStack(itemstack1, 9 + 27, this.inventorySlots.size(), true)) {
 							return ItemStack.EMPTY;
 						}
 					} else {
-						if (!this.mergeItemStack(itemstack1, 0, 0 + 27, false)) {
+						if (!this.mergeItemStack(itemstack1, 9, 9 + 27, false)) {
 							return ItemStack.EMPTY;
 						}
 					}
