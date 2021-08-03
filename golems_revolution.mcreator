@@ -70,15 +70,26 @@
       "ids": {},
       "registry_name": "golems_soul",
       "path": "~/Ore"
+    },
+    {
+      "name": "LittleGolem",
+      "type": "mob",
+      "sortid": 8,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "little_golem"
     }
   ],
   "variable_elements": [],
   "sound_elements": [],
   "language_map": {
     "en_us": {
+      "item.golems_revolution.little_golem_spawn_egg": "Little Golem Spawn Egg",
       "block.golems_revolution.golems_heart_block": "Block of GolemsHeart",
       "block.golems_revolution.golems_heart_ore": "GolemsHeart Ore",
       "item.golems_revolution.golems_soul": "Golems Soul",
+      "entity.golems_revolution.little_golem": "Little Golem",
       "item.golems_revolution.golems_heart": "GolemsHeart"
     }
   },
