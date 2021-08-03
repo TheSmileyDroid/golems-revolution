@@ -8,7 +8,7 @@ version="1.0.0"
 displayName="Golems Revolution"
 credits="Created using mod maker MCreator - https://mcreator.net/about"
 displayURL="https://mcreator.net"
-authors="ghsil, MCreator"
+authors="SmileyDroid, MCreator"
 
 [[dependencies.golems_revolution]]
     modId="minecraft"
