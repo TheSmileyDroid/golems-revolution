@@ -60,6 +60,16 @@
       "ids": {},
       "registry_name": "golems_heart_ore_smelting",
       "path": "~/Ore"
+    },
+    {
+      "name": "GolemsSoul",
+      "type": "item",
+      "sortid": 7,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "golems_soul",
+      "path": "~/Ore"
     }
   ],
   "variable_elements": [],
@@ -68,6 +78,7 @@
     "en_us": {
       "block.golems_revolution.golems_heart_block": "Block of GolemsHeart",
       "block.golems_revolution.golems_heart_ore": "GolemsHeart Ore",
+      "item.golems_revolution.golems_soul": "Golems Soul",
       "item.golems_revolution.golems_heart": "GolemsHeart"
     }
   },
