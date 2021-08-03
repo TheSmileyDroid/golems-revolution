@@ -1,0 +1,12 @@
+{
+  "group": "golems_revolution",
+  "type": "minecraft:smelting",
+  "experience": 0.49,
+  "cookingtime": 200,
+  "ingredient": {
+    "item": "golems_revolution:golems_heart_ore"
+  },
+  "result": {
+    "item": "golems_revolution:golems_heart"
+  }
+}

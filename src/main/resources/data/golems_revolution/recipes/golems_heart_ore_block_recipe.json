@@ -1,0 +1,42 @@
+{
+  "group": "golems_revolution",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "golems_revolution:golems_heart"
+    },
+    "1": {
+      "item": "golems_revolution:golems_heart"
+    },
+    "2": {
+      "item": "golems_revolution:golems_heart"
+    },
+    "3": {
+      "item": "golems_revolution:golems_heart"
+    },
+    "4": {
+      "item": "golems_revolution:golems_heart"
+    },
+    "5": {
+      "item": "golems_revolution:golems_heart"
+    },
+    "6": {
+      "item": "golems_revolution:golems_heart"
+    },
+    "7": {
+      "item": "golems_revolution:golems_heart"
+    },
+    "8": {
+      "item": "golems_revolution:golems_heart"
+    }
+  },
+  "result": {
+    "item": "golems_revolution:golems_heart_block",
+    "count": 1
+  }
+}

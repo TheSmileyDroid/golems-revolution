@@ -1,0 +1,101 @@
+{
+  "id_map": {},
+  "mod_elements": [
+    {
+      "name": "GolemsHeart",
+      "type": "item",
+      "sortid": 1,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "golems_heart",
+      "path": "~/Ore"
+    },
+    {
+      "name": "GolemsHeartOre",
+      "type": "block",
+      "sortid": 2,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "golems_heart_ore",
+      "path": "~/Ore"
+    },
+    {
+      "name": "GolemsHeartBlock",
+      "type": "block",
+      "sortid": 3,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "golems_heart_block",
+      "path": "~/Ore"
+    },
+    {
+      "name": "GolemsHeartOreBlockRecipe",
+      "type": "recipe",
+      "sortid": 4,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "golems_heart_ore_block_recipe",
+      "path": "~/Ore"
+    },
+    {
+      "name": "GolemsHeartBlockOreRecipe",
+      "type": "recipe",
+      "sortid": 5,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "golems_heart_block_ore_recipe",
+      "path": "~/Ore"
+    },
+    {
+      "name": "GolemsHeartOreSmelting",
+      "type": "recipe",
+      "sortid": 6,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "golems_heart_ore_smelting",
+      "path": "~/Ore"
+    }
+  ],
+  "variable_elements": [],
+  "sound_elements": [],
+  "language_map": {
+    "en_us": {
+      "block.golems_revolution.golems_heart_block": "Block of GolemsHeart",
+      "block.golems_revolution.golems_heart_ore": "GolemsHeart Ore",
+      "item.golems_revolution.golems_heart": "GolemsHeart"
+    }
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": [
+      {
+        "name": "Ore",
+        "children": []
+      }
+    ]
+  },
+  "workspaceSettings": {
+    "modid": "golems_revolution",
+    "modName": "Golems Revolution",
+    "version": "1.0.0",
+    "author": "ghsil, MCreator",
+    "websiteURL": "https://mcreator.net",
+    "license": "Academic Free License v3.0",
+    "disableForgeVersionCheck": true,
+    "serverSideOnly": false,
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "forge-1.16.5",
+    "modElementsPackage": "net.mcreator.golemsrevolution",
+    "lockBaseModFiles": false
+  },
+  "mcreatorVersion": 202100118117
+}

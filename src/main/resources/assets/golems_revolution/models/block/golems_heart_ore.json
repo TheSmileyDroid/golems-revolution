@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "golems_revolution:blocks/golemsheart_ore",
+    "particle": "golems_revolution:blocks/golemsheart_ore"
+  }
+}

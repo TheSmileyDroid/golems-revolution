@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "golems_revolution:block/golems_heart_block"
+    }
+  }
+}

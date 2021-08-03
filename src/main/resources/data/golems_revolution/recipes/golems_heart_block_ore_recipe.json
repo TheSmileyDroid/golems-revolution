@@ -1,0 +1,13 @@
+{
+  "group": "golems_revolution",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "golems_revolution:golems_heart_block"
+    }
+  ],
+  "result": {
+    "item": "golems_revolution:golems_heart",
+    "count": 9
+  }
+}
