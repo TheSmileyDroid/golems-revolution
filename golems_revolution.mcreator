@@ -78,7 +78,18 @@
       "compiles": true,
       "locked_code": false,
       "ids": {},
-      "registry_name": "little_golem"
+      "registry_name": "little_golem",
+      "path": "~/Golems"
+    },
+    {
+      "name": "GolemInventory",
+      "type": "gui",
+      "sortid": 9,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "golem_inventory",
+      "path": "~/Golems"
     }
   ],
   "variable_elements": [],
@@ -98,6 +109,10 @@
     "children": [
       {
         "name": "Ore",
+        "children": []
+      },
+      {
+        "name": "Golems",
         "children": []
       }
     ]
